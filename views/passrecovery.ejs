@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="shortcut icon" href="/images/letter-g (1).png"/>
+  <link rel="stylesheet" href="/project.css">
+  <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+   <div class="login-bg"></div>
+  <div class="header">
+    <a href="/genesix" class="logo">
+      Gx-Movies<span >.hd</span>
+  </a>
+    <!-- <button>Sign in</button> -->
+    <div class="message-wrapper">
+      <div class="message"></div>
+      <div class="img"><img src="/images/close_FILL0_wght400_GRAD0_opsz24 (1).png" alt=""></div>
+    </div>
+  </div>
+  <form style="height: 200px;">
+    <div class="login" style="margin-left: 100px;">Enter Your otp</div>
+    <p class="input-wrapper">
+    <p>
+      <input type="text" name="otp" id="" placeholder="otp" class="input otp">
+      <div class="error otp"></div> 
+    </p>
+    <p><button>Reset</button></p>
+    </p>  
+  </form>
+  <p class="resend-p">
+    <button class="resend-otp" onclick="resendOtp()">Resend otp</button>
+  </p>
+  <footer></footer>
+
+ 
+
+  <script>
+
+    let form = document.querySelector('form');
+    
+    
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+
+      let otp = form.otp.value
+      
+      try{
+
+        let res = await fetch('/confirm-otp', {
+              method: 'POST',
+              body: JSON.stringify({otp}),
+              headers: {'Content-Type':'application/json'}
+            })
+
+            let result = await res.json();
+
+            if(result.result){
+              location.assign('/newpassword');
+            }else{
+              console.log(result);
+              if(result.err){
+                  document.querySelector('.message-wrapper').style.display = 'block';
+                  document.querySelector('.message').innerHTML = result.err;
+              }
+            }
+
+      }
+      catch(err){
+        console.log(err.message)
+      }
+
+    })
+
+    async function resendOtp(){
+      document.querySelector('.message-wrapper').style.display = 'block';
+      document.querySelector('.message').innerHTML = 'Loading....';
+      try{
+
+        let res = await fetch('/resendotp', {method: 'POST'})
+
+        let message = await res.json();
+
+        if(message.message === 'otp has been sent to your Email'){
+
+          document.querySelector('.message').innerHTML = message.message;
+
+        }
+
+        if(message.err){
+          if(message.err){
+
+              document.querySelector('.message').innerHTML = message.err;
+
+          }
+        }
+
+      } 
+      catch(err){
+        console.log(err.message)
+
+        document.querySelector('.message').innerHTML = 'could not send request due to bad network';
+
+      }
+    }
+
+  </script>
+
+</body>
+</html>

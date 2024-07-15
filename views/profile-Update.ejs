@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pic Upload</title>
+  <link rel="stylesheet" href="/style.css">
+    <%- include('partials/head.ejs') %> 
+    <style>
+      form input{
+        width: 200px;
+        padding: 5px 10px;
+      }
+      form .put{
+        margin-top: 10px;
+      }
+      form button{
+        margin-top: 10px;
+        width: 200px;
+        padding: 5px 10px;
+        border: none;
+        color: #fff;
+        background-color: crimson;
+      }
+    </style>
+</head>
+<body>
+    
+    <!--Scroll-progress-bar=======================-->
+    <div id="progress">
+        <span id="progress-value"></span>
+    </div>
+    
+    <%- include('./partials/nav.ejs') %>
+
+      <div class="hero">
+        <form action="">
+          <div class="put">
+            <input type="text" name="firstname" placeholder="first name">
+          </div>
+          <div class="put">
+            <input type="text" name="lastname" placeholder="last name">
+          </div>
+          <div class="put">
+            <input type="text" name="middlename" placeholder="middle name">
+          </div>
+          <div class="put">
+            <input type="date" name="dob" placeholder="dob">
+          </div>
+          <div class="put">
+            <select name="Gender" id="">
+              <option value="">GENDER</option>
+              <option value="MALE">Male</option>
+              <option value="FEMALE">Female</option>
+            </select>
+          </div>
+          <button>Submit</button>
+        </form>
+      </div>
+
+
+     <!--footer======================-->
+
+     <%- include('partials/footer') %>
+
+     <script src="/Swiper Files/swiper-bundle.min.js"></script>
+
+     <script src="/js/jquery.js"></script>
+
+     <script src="/js/home.js"></script>
+
+  <script>
+
+    let form = document.querySelector('form');
+
+    form.addEventListener('submit', async function(e){
+      e.preventDefault();
+
+      let firstname = form.firstname.value;
+      let lastname = form.lastname.value;
+      let middlename = form.middlename.value;
+      let dob = form.dob.value;
+
+      let res = await fetch('/profile-Update', {
+        method: 'POST',
+        body: JSON.stringify({firstname, lastname, middlename, dob}),
+        headers: {'Content-Type': 'application/json'}
+      })
+
+      let message = await res.json();
+
+      
+
+
+
+    })
+
+  </script>
+
+
+  </script>
+</body>
+</html>
