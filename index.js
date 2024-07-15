@@ -12,14 +12,15 @@ const path = require('path');
 const User = require('./models/user');
 const  jwt = require('jsonwebtoken');
 const { error } = require('console');
+require('dotenv').config();
 
 
 const app = express();
-  
-const myDB = 'mongodb+srv://GX-movie-admin:Amaga2003@genesix.yplxhqc.mongodb.net/';
+  console.log(process.env)
+const myDB = process.env.DATABASE_URL;
 
 mongoose.connect(myDB)
-  .then((result) => {app.listen(2003); console.log('Connected!')})
+  .then((result) => {app.listen(process.env.PORT || 2003); console.log('Connected!')})
   .catch((error) => { console.log(error) });
  
   app.set('view engine', 'ejs');
