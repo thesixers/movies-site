@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 // const express = require('express');
-const User = require('../models/user')
+const User = require('../models/user');
+const Movies = require('../models/movies');
 
 /*------------USER-MIDDLEWARE-----------------------*/
 const pageAuth = (req, res, next) =>{
@@ -148,8 +149,9 @@ const checkAdmin =  (req, res, next) =>{
       else{
         console.log(decodedtoken);
         let user = await User.findById(decodedtoken.id);
+        let movies = await Movies.find();
        if(user){
-        let name =  res.locals.user = user;
+        let name =  res.locals.user = {user: user, movies: movies};
 
         req.user = decodedtoken.id 
        }else{

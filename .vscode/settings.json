@@ -1,0 +1,5 @@
+{
+    "[ejs]": {
+        "files.autoSave": "afterDelay"
+    }
+}

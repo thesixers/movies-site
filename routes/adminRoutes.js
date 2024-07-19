@@ -36,7 +36,7 @@ router.get('/', adminAuth, async (req, res)=>{
  
   try{
     let user = await User.find();
-    res.render('admindash', {User : user});
+    res.render('admin', {User : user});
 
   }
   catch(err){
@@ -53,6 +53,17 @@ router.get('/logout',  (req, res)=>{
   res.cookie('GenesixAdmin', '', {maxAge: 1});
   res.redirect('/admin/login')
 });
+
+router.get('/users', async (req,res) =>{
+  try{
+    let users = await User.find();
+    if(users){
+      res.render('adminuser-list.ejs', {users: users, title: 'Users'})
+    }
+  }catch(err){
+    console.log(err);
+  }
+})
 
 router.get('/user/:id', adminAuth, (req, res)=>{
 

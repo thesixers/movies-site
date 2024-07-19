@@ -160,22 +160,14 @@
             border-bottom-color: #000;
         }
         .box .users-b{
-            background-color: #fff;
+            background-color: transparent;
             width: 200px;
             height: 250px;
             padding: 10px;
-            border-radius: 20px;
+            /* border-radius: 20px; */
             margin-top: 10px;
             /* border: 3px solid #000; */
             box-shadow: 0px 0px 5px 2px;
-        }
-        @media (width <= 594px) {
-            .menu{
-                display: none;
-            }
-            .box{
-                gap: 10px;
-            }
         }
         .users{
             grid-template-rows: repeat(auto-fill, 300px) !important;
@@ -227,8 +219,204 @@
             position: absolute;
             background-color: #ffffff52;
             width: 100%;
-            height: 130vh;
+            height: 100%;
             top: 0px;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+        }
+        .pop-up-wrapper .pop-up{
+            margin-top: 150px;
+            width: 700px;
+            height: 400px;
+            background-color: var(--sub-color--);
+            display: flex;
+        }
+        .pop-up-wrapper .pop-up .pop-pic-wrapper{
+            /* background-color: #fff; */
+            width: 50%;
+            display: flex;
+        }
+        .pop-up .pop-pic-wrapper .pic-wrapper{
+            width: 90%;
+            /* background-color: rgba(255, 255, 255, 0.589); */
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            border-right: 1px dotted var(--box-color--);
+        }
+        .pop-up .pop-pic-wrapper .pic-wrapper img{
+            width: 100%;
+            height: 100%;
+            clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
+        }
+        .pop-up .pop-details-wrapper{
+            /* background-color: var(--box-color--); */
+            width: 50%;
+            height: 100%;
+            position: relative;
+            color: var(--box-color--);
+            border-left: 1px dotted;
+        }
+        .pop-up .pop-details-wrapper .pop-close-wrapper{
+            width: 40px;
+            height: 40px;
+            border-bottom: 1px dotted var(--main-color--);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            z-index: 2;
+            position: relative;
+            float: right;
+            backdrop-filter: blur(220px);
+            transition: 0.3s ease-in;
+            cursor: pointer;
+        }
+        .all{
+            margin-top: -60px;
+        }
+        .pop-up .pop-details-wrapper .pop-close-wrapper:hover{
+            box-shadow: 0px 0px 4px 3px;
+        }
+        .pop-up .pop-details-wrapper .pop-details{
+            width: 100%;
+            height: 100%;
+            /* background-color: red; */
+            position: absolute;
+            top: 0;
+            z-index: 1;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .title{
+            color: #ffffff73;
+            font-size: 20px;
+            font-weight: 600;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .d{
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            padding: 10px 0px;
+        }
+        .pop-btn-wrapper{
+            width: 270px;
+            display: flex;
+            position: absolute;
+            bottom: 10px;
+        }
+        .pop-btn-wrapper .btn{
+            border: 1px dotted;
+            padding: 5px;
+            width: 100px;
+            color: #fff;
+            margin-left: 17px;
+            /* transition: 0.3s ease-in; */
+        }
+        .delete{
+            background-color: red;
+        }
+        .Update{
+            background-color: green;
+        }
+        @media (width <= 594px) {
+            .menu{
+                display: none;
+            }
+            .box{
+                gap: 10px;
+            }
+        }
+        @media (width <= 750px) {
+            .pop-up-wrapper .pop-up{
+                margin-top: 150px;
+                width: 300px;
+                height: 513px;
+                background-color: var(--sub-color--);
+                display: block;
+            }
+            .pop-up-wrapper .pop-up .pop-pic-wrapper{
+                width: 100%;
+                height: 240px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .pop-up .pop-pic-wrapper .pic-wrapper{
+                width: 200px;
+                height: 200px;
+                background-color: rgba(255, 255, 255, 0.589);
+                display: flex;
+                justify-content: center;
+                padding: 10px;
+                border-radius: 50%;
+            }
+            .pop-up .pop-pic-wrapper .pic-wrapper img{
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
+            .all{
+            margin-top: 0px;
+        }
+            .pop-up .pop-details-wrapper{
+                width: 100%;
+                height: 260px;
+                position: relative;
+                color: var(--box-color--);
+                border-top: 1px dotted;
+            }
+            .pop-up .pop-details-wrapper .pop-close-wrapper{
+                width: 35px;
+                height: 35px;
+                /* border-bottom: 1px dotted var(--main-color--); */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                z-index: 2;
+                position: relative;
+                float: right;
+                backdrop-filter: blur(220px);
+                transition: 0.5s ease-in;
+                cursor: pointer;
+                bottom: 237px;
+                right: 5px;
+            }
+            .pop-up .pop-details-wrapper .pop-details{
+                width: 100%;
+                height: 100%;
+                /* background-color: red; */
+                position: absolute;
+                top: 0;
+                z-index: 1;
+                padding: 10px;
+                display: block;
+            }
+            .title{
+                color: #ffffff73;
+                font-weight: 600;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            .d{
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                padding: 0px 0px;
+            }
+            .pop-btn-wrapper{
+                width: 270px;
+                display: flex;
+                position: absolute;
+                bottom: 0px;
+            }
+        }
+        @media (max-Height: 686px) {
+            .pop-up-wrapper .pop-up{
+                margin-top: 50px;
+            }
+            .pop-up-wrapper{
+                height: 110vh;
+            }
         }
     </style>
 </head>
@@ -236,27 +424,8 @@
     <header>
         <div class="logo">GX-Movies</div>
         <div class="right">
-            <div class="status">
-                <% if(user) { %>
-                    <% let use = user.user %>
-                    <% if(use.firstname){ %>
-                        <%= use.firstname %>
-                    <% } else { %>
-                        <% let split = use.email.split('@') %>
-                        <%= split[0] %>
-                    <% } %>        
-                <% } else { %>
-                    
-                    <%= 'ADMIN' %>
-                <% } %>    
-            </div>
-            <div class="img-wrapper" title="ADMIN Account">
-                <% if(user) {%>
-                <img src="/uploads/<%= user.user.imag %>" alt=""> 
-              <% } else {%>
-                <img src="/images/man.png" alt=""> 
-              <% } %> </div>
-        </div>
+            <div class="status">ADMIN</div>
+            <div class="img-wrapper" title="ADMIN Account"><img src="/images/man.png" alt=""></div>
     </header>
     <section>
         <div class="menu">
@@ -270,46 +439,25 @@
             </ul>
         </div>
         <div class="content">
-            <div class="message">Welcome 
-                <% if(user) { %>
-                    <%= user.firstname %>
-                <% } else {%>
-                    <%= 'ADMIN' %>
-                <% } %>        
-                !!!</div>  
+            <div class="message">Welcome ADMIN !!!</div>  
                     <div class="box users">
-                        <% if(users) {%>
-                            <% users.forEach(user => { %>
                                 <div class="users-b">
                                     <div class="user-wrapper">
                                         <div class="img-wrapper">
                                             <div class="user-img-wrapper">
-                                                <% if(user.imag) {%>
-                                                    <img src="/uploads/<%= user.imag %>" alt=""> 
-                                                  <% } else {%>
-                                                    <img src="/images/man.png" alt=""> 
-                                                  <% } %> 
+                                                    <img src="../public/images/man.png" alt=""> 
                                             </div>
                                         </div>
                                         <div class="detail-wrapper">
                                             <div class="details">
-                                                <% let use = user.user %>
-                                                    <% if(user.firstname){ %>
-                                                        <%= user.firstname + ' ' + user.lastname %>
-                                                    <% } else { %>
-                                                        <% let split = user.email.split('@') %>
-                                                        <%= split[0] %>
-                                                        
-                                                    <% } %> 
+                                                user
                                             </div>
                                         </div>
                                         <div class="button-wrapper">
                                             <div class="button">Expand</div>
                                         </div>
                                     </div>
-                                </div>
-                           <% }); %>
-                        <% } %>  
+                                </div>  
                     </div>
                 </div>
             </div>
@@ -318,14 +466,39 @@
 
     <section class="pop-up-wrapper">
         <div class="pop-up">
-            
+            <div class="pop-pic-wrapper">
+                <div class="pic-wrapper">
+                    <img src="../public/uploads/profileImage-1702572533574.jpg" alt="">
+                </div>
+            </div>
+            <div class="pop-details-wrapper">
+                    <div class="pop-close-wrapper">
+                        <span class="material-symbols-outlined" title="close">
+                            close
+                        </span>
+                    </div>
+                    <div class="pop-details">
+                       <div class="all">
+                        <div class="firstname d"><span class="title">First_Name</span>: Nnamdi</div>
+                        <div class="lastname d"><span class="title">Last_Name</span>: Amaga</div>
+                        <div class="middlename d"><span class="title">Middle_Name</span>: Joe</div>
+                        <div class="email d"><span class="title">Email</span>: nnamdiamaga2k20@gmail.com</div>
+                        <div class="gender d"><span class="title">Gender</span>: Male</div>
+                        <div class="gender d"><span class="title">Age</span>: 21yrs</div>
+                        <div class="gender d"><span class="title">D.O.B</span>: 12/04/2003</div>
+                       </div>
+                       
+                    </div>
+                    <div class="pop-btn-wrapper">
+                        <div class="delete btn">Delete User</div>
+                        <div class="Update btn">Update Status</div>
+                    </div>
+            </div>
         </div>
     </section>
 
     <script>
         // the requests
-        
-
     </script>
 </body>
 </html>
