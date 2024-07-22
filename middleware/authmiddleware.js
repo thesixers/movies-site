@@ -61,7 +61,7 @@ const checkUser =  (req, res, next) =>{
 /*---------------------ERROR-HANDLER---------------------*/
 
 const handleError = (err) => {
-  console.log(err.message,err.code);
+  console.log(err,err.code);
   let errors = {email: '', password: '', phonenumber: ''};
 
   if(err.message === 'please enter your email'){

@@ -7,213 +7,51 @@
     <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        :root{
-            --main-color--: #000;
-            --sub-color--: #202020;
-            --box-color--: #fff;
-        }
-        *{
-            margin: 0;
-            /* padding: 0; */
-        }
-        body{
-            background-color: var(--main-color--);
-            height: 90vh;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        }
-        header{
-            background-color: var(--sub-color--);
-            width: 100%;
-            height: 60px;
-            display: flex;
-            justify-content: space-between; /* Ensure items are spaced evenly */
-            align-items: center; /* Center items vertically */
-            padding: 10px 0px;
-        }
-        header .logo{
-            height: 100%;
-            padding-left: 10px;
-            font-size: 40px;
-            color: var(--box-color--);
-            font-family: Monoton;
-        }
-        header .right{
-            display: flex;
-            margin-left: auto;
-            justify-content: center;
-            align-items: center;
-            width: 200px;
-            padding: 10px;
-        }
-        .right .img-wrapper{
-            width: 50px;
-            height: 50px;
-            margin-left: auto;
-            border-radius: 50%;
-            border: 2px solid var(--box-color--);
-        }
-        .right .img-wrapper img{
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-        }
-        section{
-            height: 100%;
-            display: flex;
-        }
-        section .menu{
-            width: 250px;
-            height: 100%;
-            background-color: var(--sub-color--);
-            margin-top: 5px;
-            padding: 10px;
-
-        }
-        section .menu ul li{
-            padding: 10px;
-            border-radius: 10px;
-            list-style: none;
-            text-indent: 5px;
-            margin-top: 10px;
-            transition: 0.5s ease-out;
-            margin-left: -30px;
-        }
-        section .menu ul li a{
-            color: #fff;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            text-decoration: none;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            font-size: 20px;
-        }
-        section .menu ul li:hover{
-            background-color: var(--box-color--);
-        }
-        section .menu ul li:hover a{
-            color: var(--main-color--);
-        }
-        section .content{
-            width: 95%;
-            height: 100%;
-            background-color: var(--sub-color--);
-            margin-top: 5px;
-            margin-left: 10px;
-            /* overflow: scroll; */
-        }
-        section .content::-webkit-scrollbar{
-            display: none;
-        }
-         .message{
-            width: 98.1%;
-            height: 70px;
-            font-size: 25px;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            border-bottom: 5px solid #000;
-            color: #fff;
-        }
-        .box{
-            height: 100%;
-            /* padding: 20px; */
-            display: grid;
-            grid-template-rows: repeat(auto-fill, 180px);
-            grid-template-columns: repeat(auto-fill, 250px);
-            justify-content: center;
-            overflow: scroll;
-            background-color: var(--sub-color--);
-        }
-        .box::-webkit-scrollbar{
-            /* display: none; */
-        }
-        .box .b{
-            background-color: #fff;
-            width: 200px;
-            height: 150px;
-            padding: 10px;
-            border-radius: 20px;
-            margin-top: 10px;
-            /* border: 3px solid #000; */
-            box-shadow: 0px 0px 5px 2px;
-        }
-        .box .b .top{
-            width: 100%;
-            height: 40px;
-            font-size: 20px;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
-            text-align: center;
-        }
-        .box .b .value{
-            width: 100px;
-            height: 60px;
-            font-size: 50px;
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            border-bottom: 2px solid #fff;
-            padding-bottom: 8px;
-            margin: auto;
-            text-align: center;
-            transition: 0.5s ease-in;
-        }
-        .box .b .value:hover{
-            border-bottom-color: #000;
-        }
-        @media (width <= 594px) {
-            .menu{
-                display: none;
-            }
-            .box{
-                gap: 10px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/admin.css">
 </head>
 <body>
     <header>
-        <div class="logo">GX-Movies</div>
+        <div class="logo"> <span class="material-symbols-outlined menu-toggle">menu</span> GX-Movies</div>
         <div class="right">
-            <div class="status">
-                <% if(user) { %>
-                    <% let use = user.user %>
-                    <% if(use.firstname){ %>
-                        <%= use.firstname %>
-                    <% } else { %>
-                        <% let split = use.email.split('@') %>
-                        <%= split[0] %>
-                    <% } %>        
-                <% } else { %>
-                    
-                    <%= 'ADMIN' %>
-                <% } %>    
-            </div>
+            <div class="notification"><span class="material-symbols-outlined">notifications</span></div>
             <div class="img-wrapper" title="ADMIN Account">
                 <% if(user) {%>
                 <img src="/uploads/<%= user.user.imag %>" alt=""> 
               <% } else {%>
                 <img src="/images/man.png" alt=""> 
-              <% } %> </div>
+              <% } %> 
+            </div>
         </div>
     </header>
     <section>
         <div class="menu">
             <ul>
-                <li><a href="/admin"><span class="material-symbols-outlined">dashboard</span> <span class="title">Dashboard</span></a></li>
-                <li><a href="/"><span class="material-symbols-outlined">Theaters</span> Movies</a></li>
-                <li><a href="/admin/users"><span class="material-symbols-outlined">Group</span> Users</a></li>
-                <li><a href="/"><span class="material-symbols-outlined">Account_Circle</span></i> Account</a></li>
-                <li><a href="/"><span class="material-symbols-outlined">settings</span> Setting</a></li>
-                <li><a href="/admin/logout"><span class="material-symbols-outlined">Move_Item</span>Logout</a></li>
+                <li><a href="/admin"><span class="material-symbols-outlined" title="Dashboard">dashboard</span> <span class="side-title" title="dashboard">Dashboard</span></a></li>
+                <li><a href="/"><span class="material-symbols-outlined" title="Videos">Theaters</span> <span class="side-title" title="movies">Movies</span></a></li>
+                <li><a href="/admin/users"><span class="material-symbols-outlined" title="Users">Group</span> <span class="side-title" title="users">Users</span></a></li>
+                <li><a href="/"><span class="material-symbols-outlined" title="MY Account">Account_Circle</span></i> <span class="side-title" title="Account">Account</span></a></li>
+                <li><a href="/"><span class="material-symbols-outlined" title="settings">settings</span> <span class="side-title" title="settings">Setting</span></a></li>
+                <li><a href="/admin/logout"><span class="material-symbols-outlined" title="logout">Move_Item</span><span class="side-title" title="logout">Logout</span></a></li>
             </ul>
         </div>
         <div class="content">
-            <div class="message">Welcome 
-                <% if(user) { %>
-                    <%= user.firstname %>
-                <% } else {%>
-                    <%= 'ADMIN' %>
-                <% } %>        
-                !!!</div>
+            <div class="message">Welcome          
+                <div class="status">
+                    <% if(user) { %>
+                        <% let use = user.user %>
+                        <% if(use.firstname){ %>
+                            <%= use.firstname %>
+                        <% } else { %>
+                            <% let split = use.email.split('@') %>
+                              <%= split[0] %>
+                        <% } %>        
+                    <% } else { %>
+                        
+                        <%= 'ADMIN' %>
+                    <% } %>  
+                    !!!  
+                </div>
+            </div>
             <div class="box">
                 <div class="users b">
                     <div class="top">Total No Users</div>
@@ -249,7 +87,26 @@
     </section>
 
     <script>
-        
+        let menu = document.querySelector('.menu-toggle');
+        let sideBar = document.querySelector('.menu');
+
+
+        menu.addEventListener('click', function(){
+            // (sideBar.style.display === 'none') ? sideBar.style.display = 'block' : sideBar.style.display = 'none';
+            sideBar.classList.toggle('show')
+        })
+
+        /* toogle theme */
+        // script.js
+        document.addEventListener("DOMContentLoaded", () => {
+            const toggleButton = document.getElementById("toggle-theme");
+            const body = document.body;
+
+            toggleButton.addEventListener("click", () => {
+                body.classList.toggle("dark-theme");
+            });
+        });
+
 
     </script>
 </body>

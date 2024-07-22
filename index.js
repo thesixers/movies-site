@@ -16,7 +16,6 @@ require('dotenv').config();
 
 
 const app = express();
-  console.log(process.env)
 const myDB = process.env.DATABASE_URL;
 
 mongoose.connect(myDB)

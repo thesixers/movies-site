@@ -52,7 +52,7 @@ return jwt.sign({otp}, 'pablos doings', {expiresIn: maxAge})
 
 function gxAuth(user_id){
   return jwt.sign({user_id}, 'i am a baller', {expiresIn: maxAge})
-  }
+}
 
 module.exports.signup_get = (req,res) => {
   res.status(200).render('signup');
