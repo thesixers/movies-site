@@ -48,8 +48,8 @@ header .right{
     padding: 10px;
 }
 .notification{
-    margin-left: 45px;
     color: var(--box-color--);
+    cursor: pointer;
 }
 .right .img-wrapper{
     width: 50px;
@@ -122,8 +122,8 @@ section .content::-webkit-scrollbar{
     padding: 10px;
     display: flex;
     align-items: center;
-    border-bottom: 5px solid #000;
-    color: #fff;
+    border-bottom: 5px solid var(--main-color--);
+    color: var(--box-color--);
 }
 .box{
     height: 87%;
@@ -218,6 +218,7 @@ section .content::-webkit-scrollbar{
 }
 .button-wrapper .button{
     background-color: var(--box-color--);
+    color: var(--main-color--);
     width: 100px;
     height: 20px;
     border: 1px solid var(--sub-color--);
@@ -226,15 +227,16 @@ section .content::-webkit-scrollbar{
     padding: 5px;
 }
 .pop-up-wrapper{
-    position: absolute;
+    position: fixed;
     background-color: #ffffff52;
     width: 100%;
     height: 100%;
     top: 0px;
     display: flex;
     justify-content: center;
+    align-items: center;
     /* align-items: center; */
-    /* display: none; */
+    display: none;
 }
 .pop-up-wrapper .pop-up{
     margin-top: 150px;

@@ -14,6 +14,7 @@
         <div class="logo"> <span class="material-symbols-outlined menu-toggle">menu</span> GX-Movies</div>
         <div class="right">
             <div class="notification"><span class="material-symbols-outlined">notifications</span></div>
+            <div class="notification theme"><span class="material-symbols-outlined">light_mode</span></div>
             <div class="img-wrapper" title="ADMIN Account">
                 <% if(user) {%>
                 <img src="/uploads/<%= user.user.imag %>" alt=""> 
@@ -37,7 +38,11 @@
         <div class="content">
             <div class="message">Welcome 
                 <% if(user) { %>
-                    <%= user.firstname %>
+                    <% if(user.firstname){ %>
+                        <%= user.firstname %>
+                     <% }else{%>
+                        <%= user.email %>
+                    <% } %>   
                 <% } else {%>
                     <%= 'ADMIN' %>
                 <% } %>        
@@ -69,7 +74,7 @@
                                             </div>
                                         </div>
                                         <div class="button-wrapper">
-                                            <div class="button button<%= index %>" data-user='<%= JSON.stringify(user) %>'>Expand</div>
+                                            <div class="button" data-user='<%= JSON.stringify(user) %>'>Expand</div>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +90,7 @@
         <div class="pop-up">
             <div class="pop-pic-wrapper">
                 <div class="pic-wrapper">
-                    <img src="../public/uploads/profileImage-1702572533574.jpg" alt="">
+                    <img src="../public/uploads/profileImage-1702572533574.jpg" class="pop-userImg" alt="">
                 </div>
             </div>
             <div class="pop-details-wrapper">
@@ -96,13 +101,13 @@
                     </div>
                     <div class="pop-details">
                        <div class="all">
-                        <div class="firstname d"><span class="title">First_Name</span>: </div>
-                        <div class="lastname d"><span class="title">Last_Name</span>: </div>
-                        <div class="middlename d"><span class="title">Middle_Name</span>: Joe</div>
-                        <div class="email d"><span class="title">Email</span>: </div>
-                        <div class="gender d"><span class="title">Gender</span>: </div>
-                        <div class="gender d"><span class="title">Age</span>: </div>
-                        <div class="gender d"><span class="title">D.O.B</span>: </div>
+                        <div class="d"><span class="title">First_Name</span>: <span class="firstname"></span></div>
+                        <div class="d"><span class="title">Last_Name</span>: <span class="lastname"></span></div>
+                        <div class="d"><span class="title">Middle_Name</span>: <span class="middlename"></span></div>
+                        <div class="d"><span class="title">Email</span>: <span class="email"></span></div>
+                        <div class="d"><span class="title">Gender</span>: <span class="gender"></span></div>
+                        <div class="d"><span class="title">Status</span>: <span class="status"></span></div>
+                        <div class="d"><span class="title">Age</span>: <span class="dob"></span></div>
                        </div>
                        
                     </div>
@@ -116,5 +121,22 @@
 
 
     <script src="/js/popup.js"></script>
+    <script src="/js/mobile-menu.js"></script>
+    <script>
+        let themeChange = document.querySelector('.theme');
+        let theme = 'dark'
+
+        themeChange.addEventListener('click', function(){
+            if(theme === 'dark'){
+                document.body.classList.toggle('light-theme');
+                themeChange.innerHTML = `<span class="material-symbols-outlined">contrast</span>`;
+                theme = 'light';
+            }else{
+                document.body.classList.toggle('light-theme');
+                themeChange.innerHTML = `<span class="material-symbols-outlined">light_mode</span>`;
+                theme = 'dark';
+            }
+        })
+    </script>
 </body>
 </html>
