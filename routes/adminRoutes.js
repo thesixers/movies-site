@@ -28,7 +28,7 @@ const maxAge = 1 * 24 * 60 * 60;
 
 router.get('/login', async (req, res)=>{
  
-  res.render('adminLogin')
+  res.render('admin/adminLogin')
   
 }); 
 
@@ -36,7 +36,7 @@ router.get('/', adminAuth, async (req, res)=>{
  
   try{
     let user = await User.find();
-    res.render('admin', {User : user});
+    res.render('admin/admin', {User : user});
 
   }
   catch(err){
@@ -58,7 +58,7 @@ router.get('/users', async (req,res) =>{
   try{
     let users = await User.find();
     if(users){
-      res.render('adminuser-list.ejs', {users: users, title: 'Users'})
+      res.render('admin/adminuser-list.ejs', {users: users, title: 'Users'})
     }
   }catch(err){
     console.log(err);

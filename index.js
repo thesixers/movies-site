@@ -29,9 +29,14 @@ mongoose.connect(myDB)
   app.use(express.json());
   app.use(cookieParser());
   app.use(morgan('dev')); 
-  app.use(requestIp.mw());
+  // app.use(requestIp.mw());
 
   app.get('/', (req,res) => {
+     let ip = req.headers['cf-connecting-ip'] || 
+    req.headers['x-real-ip'] || 
+    req.headers['x-forwarded-for'] ||
+     req.socket.remoteAddress || '';
+    console.log(ip);
     res.redirect('/genesix');  
   }); 
 
