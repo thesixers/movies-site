@@ -20,7 +20,7 @@ const myDB = process.env.DATABASE_URL;
 
 mongoose.connect(myDB)
   .then((result) => {app.listen(process.env.PORT || 2003); console.log('Connected!')})
-  .catch((error) => { console.log(error) });
+  .catch((error) => { console.error(error) });
  
   app.set('view engine', 'ejs');
 
@@ -36,7 +36,7 @@ mongoose.connect(myDB)
     req.headers['x-real-ip'] || 
     req.headers['x-forwarded-for'] ||
      req.socket.remoteAddress || '';
-    console.log(ip);
+    console.log(`this is the user ip => ${ip}`);
     res.redirect('/genesix');  
   }); 
 
