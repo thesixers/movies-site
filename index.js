@@ -12,6 +12,7 @@ const path = require('path');
 const User = require('./models/user');
 const  jwt = require('jsonwebtoken');
 const { error } = require('console');
+const fileUploader = require('express-fileupload');
 require('dotenv').config();
 
 
@@ -30,12 +31,13 @@ mongoose.connect(myDB)
   app.use(cookieParser());
   app.use(morgan('dev')); 
   // app.use(requestIp.mw());
+  app.use(fileUploader({useTempFiles: true}))
 
   app.get('/', (req,res) => {
      let ip = req.headers['cf-connecting-ip'] || 
-    req.headers['x-real-ip'] || 
-    req.headers['x-forwarded-for'] ||
-     req.socket.remoteAddress || '';
+      req.headers['x-real-ip'] || 
+      req.headers['x-forwarded-for'] ||
+      req.socket.remoteAddress || '';
     console.log(`this is the user ip => ${ip}`);
     res.redirect('/genesix');  
   }); 

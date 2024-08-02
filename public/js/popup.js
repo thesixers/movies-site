@@ -31,3 +31,7 @@ document.querySelectorAll('.button').forEach(button => {
 function closePop(){
     popSection.style.display = 'none';
 }
+
+let num = 23
+
+num.toString()

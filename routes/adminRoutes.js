@@ -12,6 +12,7 @@ const router = express.Router();
 router.get('*', checkAdmin );
 
 
+
 //movieUpload
 const movieStorage = multer.diskStorage({
   destination: './public/Movies/',
@@ -33,7 +34,6 @@ router.get('/login', async (req, res)=>{
 }); 
 
 router.get('/', adminAuth, async (req, res)=>{
- 
   try{
     let user = await User.find();
     res.render('admin/admin', {User : user});
@@ -131,7 +131,6 @@ router.post('/login', async (req, res)=>{
       res.cookie('GenesixAdmin', adminT, {httpOnly: true, maxAge: maxAge * 1000});
       res.status(400).json({ admin: admin._id})
     }else{
-      console.log('u are not an admin fuck off');
       res.json({adminError: 'u are not an admin so piss off'})
     }
 

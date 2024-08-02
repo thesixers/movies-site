@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const cookie = require('cookie-parser');
 const multer = require('multer');
 const path = require('path');
+const gx = require('genesix');
+const uploadImage = require('../middleware/uploadmiddleware');
 
 
 
@@ -118,13 +120,29 @@ module.exports.picUpload_post =  (req, res) =>{
             res.redirect('/login')    
           }
           else{
-            console.log(decodedtoken);
+            // console.log(decodedtoken);
             let user = await User.findById(decodedtoken.id);
     
             try{       
-               let met = await user.updateOne({ imag: req.file.originalname });
-              // res.json({user});
-              res.redirect('/genesix')
+              let file  = req.files.profileImage
+
+             let uploaded =  await uploadImage(file.tempFilePath);
+
+             if(uploaded){
+              let url = uploaded;
+               let isImageSaved = await user.updateOne({ imag: url });
+
+               if(isImageSaved){
+                  res.redirect('/genesix')
+               }else{
+                  gx.log('error in uploading image')
+               }
+
+
+             }
+
+            // gx.log(file)
+              
             }
             catch(err){
               console.log(err)

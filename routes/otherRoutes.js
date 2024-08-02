@@ -11,18 +11,18 @@ router.get('*', checkUser);
 
 
 //imageStorage
-const storage = multer.diskStorage({
-  destination: './public/uploads/',
-  filename: function(req, file, cb){
-    const fileName = `${file.originalname}`;
-    cb(null, fileName);
-  }
-});
+// const storage = multer.diskStorage({
+//   destination: './public/uploads/',
+//   filename: function(req, file, cb){
+//     const fileName = `${file.originalname}`;
+//     cb(null, fileName);
+//   }
+// });
 
 //initialize upload variable
-const uploads = multer({ 
-  storage: storage 
-})
+// const uploads = multer({ 
+//   storage: storage 
+// })
 
   
 
@@ -38,7 +38,7 @@ router.get('/profile-Update', pageAuth, otherPage.profileUpdate_get);
 
 router.get('/pic-upload', pageAuth, otherPage.picUpload_get);
 
-router.post('/pic-upload', uploads.single('profileImage'), otherPage.picUpload_post);
+router.post('/pic-upload', otherPage.picUpload_post);
 
 router.get('/:id', pageAuth, otherPage.id); 
 

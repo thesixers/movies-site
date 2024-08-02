@@ -25,7 +25,7 @@
       <button class="dropbtn">
         <% if (user) { %>
           <% if (user.imag) {%>
-            <img src="/uploads/<%= user.imag %>" alt="" width="40" height="40" class="rounded-circle me-2 pic">
+            <img src="<%= user.imag %>" alt="" width="40" height="40" class="rounded-circle me-2 pic">
        <% } else {%>
           <img src="/images/man.png"alt="" width="40" height="40" class="rounded-circle me-2 pic">
        <% } %> 
@@ -81,7 +81,7 @@
   <div class="p-img-cover">
     <% if (user) { %>
       <% if (user.imag) {%>
-        <img src="/uploads/<%= user.imag %>" class="profile-img">
+        <img src="<%= user.imag %>" class="profile-img">
         <a href="/genesix/pic-upload"><img src="/images/plus (1).png" class="add-img" alt=""></a>
    <% } else {%>
       <img src="/uploads/man.png" alt="" class="profile-img">
