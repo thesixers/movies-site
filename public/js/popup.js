@@ -15,7 +15,7 @@ document.querySelectorAll('.button').forEach(button => {
         let dob = document.querySelector('.dob');
 
 
-        (user.imag) ? popUserImg.src = `/uploads/${user.imag}` : popUserImg.src = '/images/man.png';
+        (user.imag) ? popUserImg.src = user.imag : popUserImg.src = '/images/man.png';
         (user.firstname) ? firstname.innerHTML = user.firstname : firstname.innerHTML = 'EMPTY';
         (user.lastname) ? lastname.innerHTML = user.lastname : lastname.innerHTML = 'EMPTY';
         (user.middlename) ? middlename.innerHTML = user.middlename : middlename.innerHTML = 'EMPTY';

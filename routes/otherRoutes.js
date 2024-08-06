@@ -40,13 +40,11 @@ router.get('/pic-upload', pageAuth, otherPage.picUpload_get);
 
 router.post('/pic-upload', otherPage.picUpload_post);
 
-router.get('/:id', pageAuth, otherPage.id); 
-
-router.post('/profile-Update', pageAuth, otherPage.profileUpdate_post);
-
-
+router.post('/profileUpdate', pageAuth, otherPage.profileUpdate_post);
 
 router.post('/movie-search', otherPage.movieSearch_post);
+
+router.get('/:id', pageAuth, otherPage.id); 
 
 
 module.exports = router;

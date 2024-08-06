@@ -62,7 +62,7 @@ module.exports.picUpload_get = (req, res) =>{
 }
 
 module.exports.profileUpdate_get = (req, res) =>{
-  res.render('profile-Update');
+  res.render('profileUpdate');
 }
 
 module.exports.id = (req,res) =>{
@@ -75,29 +75,29 @@ module.exports.id = (req,res) =>{
 }
 
 module.exports.profileUpdate_post = async (req, res) =>{
-  // res.render('profile');
-  let {firstname, lastname, middlename, dob} = req.body;
+  let {firstName,lastName,middleName,dob,gender} = req.body;
 
-  const token = req.cookies.signin;
+  const token = req.cookies.sign;
 
   if(token){
     jwt.verify( token,'Is Obi a boy?',async (err, decodedtoken) =>{
       if(err){
         console.log(err.message);
-        res.redirect('/login')
-
-        
+        res.redirect('/login')     
       }
       else{
         console.log(decodedtoken);
         let user = await User.findById(decodedtoken.id);
 
         try{       
-           let met = await user.updateOne({firstname, lastname, middlename, dob});
-          res.json({user});
+           let saved = await user.updateOne({firstname: firstName,lastname: lastName,middlename: middleName,dob,gender});
+
+           saved ? res.status(200).json({message: 'profile updated successfully!!!'}) 
+           :
+           res.status(400).json({error: 'this error occured while updating details'})
         }
         catch(err){
-          console.log(err)
+          res.status(500).json({error: 'server error'})
         }
         
       }
@@ -105,7 +105,6 @@ module.exports.profileUpdate_post = async (req, res) =>{
     })
   }
   else{
-    res.locals.user = null;
     res.redirect('/login');
   } 
 

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            object-fit: contain;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100vh;
+        }
+        .main{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        form{
+            /* background-color: rgba(255, 0, 0, 0.295); */
+            padding: 30px 20px;
+            width: 300px;
+            height: 400px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 0px 11px 3px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        form .input{
+            position: relative;
+        }
+        form input{
+            padding: 10px;
+            width: 260px;
+            height: 23px;
+            outline: none;
+            position: relative;
+        }
+        form .input span{
+            position: absolute;
+            left: 13px;
+            color: grey;
+            transition: all 0.2s ;
+            padding: 0px 5px;
+            top: -9px;
+            border-radius: 2px;
+            background-color: #fff;
+        }
+        form input:focus ~ span{
+            /* color: red; */
+            /* border: 1px solid black; */
+            padding: 0px 5px;
+            top: -9px;
+            border-radius: 2px;
+            background-color: #fff;
+        }
+        form select,
+        option{
+            width: 280px;
+            height: 40px;
+            padding: 10px;
+            outline: none;
+        }
+        form button{
+            width: 280px;
+            height: 40px;
+        }
+        .preloader{
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+   <section class="main">
+    <form>
+        <div class="firstname input">
+            <input type="text" name="firstname" class="t" id="firstname">
+            <span>fistname</span>
+        </div>
+        <div class="lastname input">
+            <input type="text" name="lastname" class="t" id="lastname">
+            <span>lastname</span>
+        </div>
+        <div class="middlename input">
+            <input type="text" name="middlename" class="t" id="middlename">
+            <span>middlename</span>
+        </div>
+        <div class="firstname input">
+            <input type="date" name="dob" class="t" id="dob">
+        </div>
+        <div class="G">
+            <select name="gender" id="gender">
+                <option value="value" >Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        <button class="gx-form-btn">Submit</button>
+    </form>
+   </section>
+
+
+   <script>
+
+    let form = document.querySelector('form');
+    // let t = document.querySelectorAll('.t');
+    let button = document.querySelector('.gx-form-btn');    
+
+    form.addEventListener('submit', async (e) =>{
+        e.preventDefault();
+
+        let firstName = form.firstname.value;
+        let lastName = form.lastname.value;
+        let middleName = form.middlename.value;
+        let dob = form.dob.value;
+        let gender = form.gender.value;
+
+        button.innerHTML = '<img src="/images/Animation - 1722866223961.gif" class="preloader" alt="">';
+
+        try{
+
+           let response =  await fetch('/genesix/profileUpdate', {
+                method: 'POST',
+                body: JSON.stringify({firstName,lastName,middleName,dob,gender}),
+                headers: {'Content-Type':'application/json'}
+            });
+
+                
+
+                let data = await response.json();
+
+                if(data.error){
+                    setTimeout(() => {
+                        button.innerHTML = data.error
+                    }, 2000);
+                    button.innerHTML = 'Submit'
+                }else{
+                    location.assign('/genesix');
+                }
+                    
+
+            
+
+
+        }
+            catch(err){
+            console.error('this error occured:' + err);
+        }
+    })
+
+
+   </script>
+</body>
+</html>

@@ -3,12 +3,13 @@ require('dotenv').config();
 
 let secret = process.env.CLOUDINARY_SECRET;
 let api_key = process.env.CLOUDINARY_API_KEY;
+let id = process.env.CLOUDINARY_ID;
 
 const uploadImage =  async(image) =>{
 
     // Configuration
     cloudinary.config({ 
-        cloud_name: 'dbh3dpyaj', 
+        cloud_name: id, 
         api_key: api_key, 
         api_secret: secret // Click 'View Credentials' below to copy your API secret
     });

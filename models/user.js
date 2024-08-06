@@ -43,6 +43,9 @@ const userSchema = new Schema({
   },
   status:{
     type: String
+  },
+  gender:{
+    type: String
   }
 })
 
