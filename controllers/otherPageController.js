@@ -62,7 +62,7 @@ module.exports.picUpload_get = (req, res) =>{
 }
 
 module.exports.profileUpdate_get = (req, res) =>{
-  res.render('profileUpdate');
+  res.render('profileUpdate', {title: 'profile update'});
 }
 
 module.exports.id = (req,res) =>{

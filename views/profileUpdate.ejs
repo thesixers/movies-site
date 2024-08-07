@@ -3,13 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gx-Movies | <%= title %></title>
     <style>
         body{
             object-fit: contain;
             background-repeat: no-repeat;
             width: 100%;
             height: 100vh;
+            background-color: #080808;
+        }
+        .back{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ffffff7e;
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+        }
+        .back .icon{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e70634;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .main{
             width: 100%;
@@ -24,12 +48,13 @@
             width: 300px;
             height: 400px;
             backdrop-filter: blur(10px);
-            box-shadow: 0px 0px 11px 3px;
+            /* box-shadow: 0px 0px 11px 3px #e70634; */
             border-radius: 8px;
             display: flex;
             flex-direction: column;
             gap: 20px;
             align-items: center;
+            border: 1px solid #e70634;
         }
         form .input{
             position: relative;
@@ -40,24 +65,22 @@
             height: 23px;
             outline: none;
             position: relative;
+            border:1px solid #e70634;
+            border-radius: 5px;
+            
         }
         form .input span{
             position: absolute;
             left: 13px;
-            color: grey;
+            color: #e70634;
             transition: all 0.2s ;
             padding: 0px 5px;
             top: -9px;
             border-radius: 2px;
-            background-color: #fff;
-        }
-        form input:focus ~ span{
-            /* color: red; */
-            /* border: 1px solid black; */
-            padding: 0px 5px;
-            top: -9px;
-            border-radius: 2px;
-            background-color: #fff;
+            /* background-color: #fff; */
+            background-color: #ffffff6c;
+            backdrop-filter: blur(50px);
+            /* border:1px solid #e70634; */
         }
         form select,
         option{
@@ -69,6 +92,9 @@
         form button{
             width: 280px;
             height: 40px;
+            background-color: #e70634;
+            border: none;
+            color: #fff;
         }
         .preloader{
             width: 80px;
@@ -76,6 +102,12 @@
     </style>
 </head>
 <body>
+    <div class="back" title="click to go back">
+        <span class="icon">
+            <img src="" alt="">
+            Back
+        </span>
+    </div>
    <section class="main">
     <form>
         <div class="firstname input">
