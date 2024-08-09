@@ -9,21 +9,6 @@ const router = express.Router();
 
 router.get('*', checkUser);
 
-
-//imageStorage
-// const storage = multer.diskStorage({
-//   destination: './public/uploads/',
-//   filename: function(req, file, cb){
-//     const fileName = `${file.originalname}`;
-//     cb(null, fileName);
-//   }
-// });
-
-//initialize upload variable
-// const uploads = multer({ 
-//   storage: storage 
-// })
-
   
 
 router.get('/', pageAuth, otherPage.home_get);

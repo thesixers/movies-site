@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gx-Movies | <%= title %></title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
         body{
             object-fit: contain;
@@ -16,8 +17,6 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: #ffffff7e;
-            backdrop-filter: blur(20px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,15 +24,21 @@
             top: 10px;
             left: 10px;
             cursor: pointer;
+            transition: all 0.2s ease-in;
         }
         .back .icon{
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: #e70634;
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
+            border: 1px solid #fff;
+        }
+        .back:hover{
+            background-color: #ffffff7e;
+            backdrop-filter: blur(20px);
         }
         .main{
             width: 100%;
@@ -104,8 +109,9 @@
 <body>
     <div class="back" title="click to go back">
         <span class="icon">
-            <img src="" alt="">
-            Back
+            <span class="material-symbols-outlined">
+                arrow_back
+                </span>
         </span>
     </div>
    <section class="main">
@@ -138,5 +144,6 @@
 
 
    <script src="/js/updateDetails.js"></script>
+   <script src="/js/preloader.js"></script>
 </body>
 </html>

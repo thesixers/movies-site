@@ -6,6 +6,7 @@ const cookie = require('cookie-parser');
 const { handleError, adminAuth, adminToken, checkAdmin } = require('../middleware/authmiddleware');
 const Movie  = require('../models/movies');
 const multer = require('multer');
+const uploadMovies = require('../middleware/uploadmiddleware');
 
 const router = express.Router();
 
@@ -145,41 +146,56 @@ router.post('/login', async (req, res)=>{
 });
 
 
-router.post('/movies-upload', upload.fields([{ name: 'newMovie'}, { name: 'image' }]), async (req, res)=>{
+router.post('/movies-upload', async (req, res)=>{
 
-  const title = req.body.title;
+  let movieImg = req.files.movieImg;
+  let movie = req.files.movie;
 
-  const newMovie = new Movie({
-    title: req.body.title,
-    image: req.files['image'][0].originalname,
-    description: req.body.description,
-    language: req.body.language,
-    quality: req.body.quality,
-    year: req.body.year,
-    genre: req.body.genre,
-    type: req.body.type, 
-    filePath: req.files['newMovie'][0].originalname 
-});
 
-try {
-   const checkMovie = await Movie.findOne({title});
+  var upload = await uploadMovies(movieImg,movie);
 
-   if(!checkMovie){
-      // Save the movie to MongoDB
-      const savedMovie = await newMovie.save();
-      res.redirect('/admin');
-   } else{
-    res.json({message:'this movie already exists!'})
-   }
-  
-} catch (error) {
-  console.error('Error saving movie:', error);
-  res.status(500).json({
-    success: false,
-    message: 'Error saving movie to MongoDB',
-    error: error.message,
+  if(upload.url){
+    let moviePath = upload.url;
+    let movieImgPath = upload.url;
+
+    const newMovie = new Movie({
+      title: req.body.title,
+      image: movieImgPath,
+      description: req.body.description,
+      language: req.body.language,
+      quality: req.body.quality,
+      year: req.body.year,
+      genre: req.body.genre,
+      type: req.body.type, 
+      filePath: moviePath 
   });
-}
+  
+  try {
+     const checkMovie = await Movie.findOne({title});
+  
+     if(!checkMovie){
+        // Save the movie to MongoDB
+        const savedMovie = await newMovie.save();
+        res.redirect('/admin');
+     } else{
+      res.json({message:'this movie already exists!'})
+     }
+    
+  } catch (error) {
+    console.error('Error saving movie:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error saving movie to MongoDB',
+      error: error.message,
+    });
+  }
+
+  }else{
+    console.log(upload.err);
+  }
+
+
+ 
 }); 
 
 module.exports = router; 

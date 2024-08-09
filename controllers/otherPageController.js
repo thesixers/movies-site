@@ -42,7 +42,6 @@ module.exports.animation_get = (req, res)=>{
   .catch(err =>{
     console.log(err);
   });
-  // res.render('animation')
 }
 
 module.exports.series_get = (req, res)=>{
@@ -54,7 +53,6 @@ module.exports.series_get = (req, res)=>{
   .catch(err =>{ 
     console.log(err);
   });
-  // res.render('series') 
 } 
 
 module.exports.picUpload_get = (req, res) =>{
