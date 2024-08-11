@@ -44,10 +44,3 @@ $('#m-video')[0].play();
 $('.close-movie').click(function(){
 $('#m-video')[0].pause();
 });
-
-
-let loader = document.querySelector('.pre-loader');
-
-window.addEventListener('load',function(){
-  loader.style.display = 'none';
-})

@@ -59,15 +59,15 @@ const uploadMovies =  async(movieImg,movie) =>{
        });
     
     
-       let it = uploadResult.secure_url;
+    //    let it = uploadResult.secure_url;
     
     // Optimize delivery by resizing and applying auto-format and auto-quality
-    const optimizeUrl = cloudinary.url(it, {
-        fetch_format: 'auto',
-        quality: 'auto'
-    });
+    // const optimizeUrl = cloudinary.url(it, {
+    //     fetch_format: 'auto',
+    //     quality: 'auto'
+    // });
     
-    return {url: optimizeUrl}; 
+    return uploadResult; 
 
 }
 
