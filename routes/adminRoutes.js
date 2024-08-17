@@ -150,9 +150,11 @@ router.post('/moviesupload', async (req, res)=>{
     let movieImg;
     let episodes = [];
     let {title, description, language, quality, year, genre} = req.body;
+    console.log('new upload');
   
     if(req.files){
       let {img,moviefile, epfile} = req.files;
+      console.log('new file upload incoming');
   
       if(moviefile){
         let mF = req.files.moviefile;
