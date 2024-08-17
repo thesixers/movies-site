@@ -45,7 +45,7 @@
 
             <!-- img------------------->
             <div class="main-slider-img">
-              <img src="/Movies/<%= movie.image %>" alt="poster" />
+              <img src="<%= movie.image %>" alt="poster" />
             </div>
 
             <!-- text------------------ -->
@@ -127,7 +127,7 @@
       <div class="post-box">
         <!--img----->
         <div class="post-img">
-          <img src="/Movies/<%= movie.image %>" alt="">
+          <img src="<%= movie.image %>" alt="">
         </div>
         <!-- text------------------ -->
         <div class="main-slider-text">
@@ -200,13 +200,13 @@
       <% for (i = 0; i < movies.length; i++) { %>
 
       <% const movie = movies[i] %>
-      <% if(movie.type === 'series') { %>
+      <% if(movie.type === 'Series') { %>
 
       <!--post-box------------->
       <div class="post-box">
         <!--img----->
         <div class="post-img">
-          <img src="/Movies/<%= movie.image %>" alt="">
+          <img src="<%= movie.image %>" alt="">
         </div>
         <!-- text------------------ -->
         <div class="main-slider-text">

@@ -3,3 +3,4 @@ node_modules
 /public/uploads
 .env
 tmp
+/middleware/dazzling-tensor-432520-t4-a2eec2aeff99.json

@@ -21,7 +21,7 @@
 
         <!--===img=====================-->
         <div class="m-banner-img">
-            <img src="/Movies/<%= movie.image %>" alt="">
+            <img src="<%= movie.image %>" alt="">
         </div>
 
 
@@ -126,15 +126,34 @@
     <section class="download-movie">
 
       <!--container------------>
-      <div class="download-container">
-        <!-- box -->
-        <div class="download-box">
-          <span><i class="fas fa-server"></i> Server 1</span>
-          <span><%= movie.language %></span>
-          <span>480p</span>
-          <a href="/Movies/<%= movie.filePath %>" download>Download</a>
-        </div>
-      </div>
+      <% if(movie.episodes.length){ %>
+        <% let eps = movie.episodes %>
+
+        <% eps.forEach((ep,i) => { %>
+            <div class="download-container">
+                <div class="download-box">
+                    <span><i class="fas fa-server"></i>Episode <%= ep.episode + 1 %> </span>
+                    <span><%= movie.language %></span>
+                    <span>480p</span>
+                    <a href="<%= ep.url %>" download>Download</a>
+                </div>
+          </div>
+       <% }); %>
+        
+
+      <% }else{ %>  
+
+        <div class="download-container">
+            <!-- box -->
+            <div class="download-box">
+              <span><i class="fas fa-server"></i> Server 1</span>
+              <span><%= movie.language %></span>
+              <span>480p</span>
+              <a href="<%= movie.filePath %>" download>Download</a>
+            </div>
+          </div>
+
+      <% } %>  
     </section>
 
     <script type="text/javascript">
@@ -160,6 +179,7 @@
 
   <script src="/js/movie-page.js"></script>
   <script src="/js/search.js"></script>
+  <script src="/js/preloader.js"></script>
 
 </body>
 

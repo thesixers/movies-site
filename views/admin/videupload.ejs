@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="/public/admin.css">
-</head>
-
-<body>
   <div class="fit">
     <form class="video-upload">
-      <div class="close">x</div>
+      <div class="close close-upload-form">x</div>
       <div class="type">
         <div class="movies">Movies</div>
         <div class="series">Series</div>
@@ -27,7 +17,7 @@
           <input type="file" class="movieImg" onchange="imageChange()" name="img" id="img">
         </div>
         <div class="details">
-          <input type="text" class="name dt" placeholder="Name">
+          <input type="text" class="name dt" name="title" placeholder="Name">
           <textarea name="description" id="description" class="description" placeholder="Description"></textarea>
           <select name="language" id="language" class="dt">
             <option value="english">English</option>
@@ -59,12 +49,13 @@
           </select>
           <div class="eps-wrapper sris">
             <div class="eps">
-              <div><span class="ep-wrapper">Episode 1</span> | <input type="file" class="ep-file"></div>
+              <div><span class="ep-wrapper">Episode 1</span> | <input type="file" class="ep-file" name="epfile"></div>
             </div>
             <div class="add-episode">Add Episode</div>
             <button class="sris-btn">Upload</button>
           </div>
           <div class="eps-wrapper mvs">
+            <input type="file" name="moviefile" id="moviefile" class="moviefile">
             <button class="mvs-btn">Upload</button>
           </div>
         </div>
@@ -95,7 +86,7 @@
 
     addEpisodeBtn.addEventListener('click', (e) => {
       // e.preventDefault();
-      episodes.innerHTML += `<div><span class='ep-wrapper'>Episode ${count++}</span> | <input type="file" class="ep-file"></div>`
+      episodes.innerHTML += `<div><span class='ep-wrapper'>Episode ${count++}</span> | <input type="file" class="ep-file" name='epfile'></div>`
     })
 
       movies.addEventListener('click', (e)=>{
@@ -113,31 +104,45 @@
         series.classList.add('type-color-change')
     });
 
+    document.querySelector('.close-upload-form').addEventListener('click', (e)=>{
+      document.querySelector('.fit').style.display = 'none';
+    })
+
         function imageChange() {
         let imgLink = URL.createObjectURL(inputFile.files[0]);
 
             mi.src = imgLink;
         }
 
-        seriesBtn.addEventListener('click', async (e)=>{
-          e.preventDefault();
+       form.addEventListener('submit',async function(e){
 
-          // let name = ;
-          // let description = ;
-          // let language = ;
-          // let quality = ;
-          // let year = ;
-          // let genre = ;
-          let episode = [
+        e.preventDefault()
 
-          ]
-          document.querySelectorAll('.ep-file').forEach(ep =>{
-            console.log(ep);
-          })
+          const Data = new FormData(this);
 
-          console.log(episodes.length);
-        })
+          try{
+
+            let res = await fetch('/admin/moviesupload', {
+              method: 'POST',
+              body: Data
+            });
+
+            let data = await res.json();
+
+            if(data.error){
+              console.log(data.error);
+            }else{
+              console.log(data.message);
+            }
+          }
+          catch(err){
+            console.log(err);
+          }
+
+       });
+
+
+       window.addEventListener('load', ()=>{
+        document.querySelector('.moviefile').value = '';
+       })
   </script>
-</body>
-
-</html>

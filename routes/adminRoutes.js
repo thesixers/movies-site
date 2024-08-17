@@ -145,57 +145,79 @@ router.post('/login', async (req, res)=>{
   }
 });
 
-
-router.post('/movies-upload', async (req, res)=>{
-
-  let movieImg = req.files.movieImg;
-  let movie = req.files.movie;
-
-
-  var upload = await uploadMovies(movieImg,movie);
-
-  if(upload.url){
-    let moviePath = upload.url;
-    let movieImgPath = upload.url;
-
-    const newMovie = new Movie({
-      title: req.body.title,
-      image: movieImgPath,
-      description: req.body.description,
-      language: req.body.language,
-      quality: req.body.quality,
-      year: req.body.year,
-      genre: req.body.genre,
-      type: req.body.type, 
-      filePath: moviePath 
-  });
+router.post('/moviesupload', async (req, res)=>{
+    let movieUrl;
+    let movieImg;
+    let episodes = [];
+    let {title, description, language, quality, year, genre} = req.body;
   
-  try {
-     const checkMovie = await Movie.findOne({title});
+    if(req.files){
+      let {img,moviefile, epfile} = req.files;
   
-     if(!checkMovie){
-        // Save the movie to MongoDB
-        const savedMovie = await newMovie.save();
-        res.redirect('/admin');
-     } else{
-      res.json({message:'this movie already exists!'})
-     }
+      if(moviefile){
+        let mF = req.files.moviefile;
+  
+        let url = await uploadFile(mF);
+        movieUrl = url
+      }
+  
+      if(img){
+        let mF = req.files.img;
+  
+        let url = await uploadImage(mF.tempFilePath);
+  
+        movieImg = url
+      }
+  
+      if(epfile){
+        let files =  Array.isArray(epfile)? epfile : [epfile];
+        let count = 0;
+  
+        for(let file of files){
+          let url = await uploadFile(file);
+          episodes.push({
+            episode: count++,
+            url: url
+          })
+        }
+      }
+  
+      console.log(episodes);
+    }
+  
+      try{
+        let upload = await Movies.create({
+          title: title,
+          filePath: movieUrl,
+          description:description,
+          language:language,
+          quality:quality,
+          year:year,
+          image: movieImg,
+          type:(movieUrl) ? 'Movie' : 'Series',
+          genre:genre,
+          episodes: episodes,
+        })
     
-  } catch (error) {
-    console.error('Error saving movie:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error saving movie to MongoDB',
-      error: error.message,
-    });
-  }
+        if(upload){
+  
+          res.json({
+            message: 'upload was successful'
+          })
+  
+          console.log(upload.id);
+          
+        }else{
+          res.json({error: 'this error occurred:' + err})
+          console.log('error in uploading to mongo');
+        }
+  
+      }
+      catch(err){
+        // gx.log(err)
+        res.json({error: 'this error occurred:' + err});
+      }
+    }); 
 
-  }else{
-    console.log(upload.err);
-  }
-
-
- 
-}); 
 
 module.exports = router; 

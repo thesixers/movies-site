@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="/admin.css">
 </head>
 <body>
+    <%- include('videupload.ejs') %> 
     <header>
         <div class="logo"> <span class="material-symbols-outlined menu-toggle">menu</span> GX-Movies</div>
         <div class="right">
             <div class="notification"><span class="material-symbols-outlined">notifications</span></div>
             <div class="img-wrapper" title="ADMIN Account">
                 <% if(user) {%>
-                <img src="/uploads/<%= user.user.imag %>" alt=""> 
+                <img src="<%= user.user.imag %>" alt=""> 
               <% } else {%>
                 <img src="/images/man.png" alt=""> 
               <% } %> 
@@ -35,7 +36,8 @@
             </ul>
         </div>
         <div class="content">
-            <div class="message">Welcome          
+            <div class="message">
+                Welcome          
                 <div class="status">
                     <% if(user) { %>
                         <% let use = user.user %>
@@ -50,6 +52,9 @@
                         <%= 'ADMIN' %>
                     <% } %>  
                     !!!  
+                </div>
+                <div class="show-upload-form">
+                    Upload
                 </div>
             </div>
             <div class="box">
@@ -98,6 +103,10 @@
                 body.classList.toggle("dark-theme");
             });
         });
+
+        document.querySelector('.show-upload-form').addEventListener('click', (e)=>{
+            document.querySelector('.fit').style.display = 'flex';
+        })
 
 
     </script>
