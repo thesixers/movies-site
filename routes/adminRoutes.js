@@ -6,7 +6,9 @@ const cookie = require('cookie-parser');
 const { handleError, adminAuth, adminToken, checkAdmin } = require('../middleware/authmiddleware');
 const Movie  = require('../models/movies');
 const multer = require('multer');
-const uploadMovies = require('../middleware/uploadmiddleware');
+const {uploadMoviesImage, uploadFile, uploadImage} = require('../middleware/uploadmiddleware');
+const Movies = require('../models/movies');
+
 
 const router = express.Router();
 
@@ -15,16 +17,6 @@ router.get('*', checkAdmin );
 
 
 //movieUpload
-const movieStorage = multer.diskStorage({
-  destination: './public/Movies/',
-  filename: function(req, file, cb){
-    const fileName = `${file.originalname}`;
-    cb(null, fileName);
-  }
-});
-
-//initialize upload variable
-const upload = multer({ storage: movieStorage });
 
 const maxAge = 1 * 24 * 60 * 60;
 
@@ -146,80 +138,75 @@ router.post('/login', async (req, res)=>{
 });
 
 router.post('/moviesupload', async (req, res)=>{
-    let movieUrl;
-    let movieImg;
-    let episodes = [];
-    let {title, description, language, quality, year, genre} = req.body;
-    console.log('new upload');
-  
-    if(req.files){
-      let {img,moviefile, epfile} = req.files;
-      console.log('new file upload incoming');
-  
-      if(moviefile){
-        let mF = req.files.moviefile;
-  
-        let url = await uploadFile(mF);
-        movieUrl = url
-      }
-  
-      if(img){
-        let mF = req.files.img;
-  
-        let url = await uploadImage(mF.tempFilePath);
-  
-        movieImg = url
-      }
-  
-      if(epfile){
-        let files =  Array.isArray(epfile)? epfile : [epfile];
-        let count = 0;
-  
-        for(let file of files){
-          let url = await uploadFile(file);
-          episodes.push({
-            episode: count++,
-            url: url
-          })
-        }
-      }
-  
-      console.log(episodes);
-    }
-  
-      try{
-        let upload = await Movies.create({
-          title: title,
-          filePath: movieUrl,
-          description:description,
-          language:language,
-          quality:quality,
-          year:year,
-          image: movieImg,
-          type:(movieUrl) ? 'Movie' : 'Series',
-          genre:genre,
-          episodes: episodes,
-        })
-    
-        if(upload){
-  
-          res.json({
-            message: 'upload was successful'
-          })
-  
-          console.log(upload.id);
-          
-        }else{
-          res.json({error: 'this error occurred:' + err})
-          console.log('error in uploading to mongo');
-        }
-  
-      }
-      catch(err){
-        // gx.log(err)
-        res.json({error: 'this error occurred:' + err});
-      }
-    }); 
+  let movieUrl;
+  let movieImg;
+  let episodes = [];
+  let {title, description, language, quality, year, genre} = req.body;
 
+  if(req.files){
+    let {img,moviefile, epfile} = req.files;
+
+    if(moviefile){
+      console.log(moviefile);
+      let mF = req.files.moviefile;
+
+      let url = await uploadFile(mF);
+      movieUrl = url
+    }
+
+    if(img){
+      let mF = req.files.img;
+
+      let url = await uploadImage(mF.tempFilePath);
+
+      movieImg = url
+    }
+
+    if(epfile){
+      let files =  Array.isArray(epfile)? epfile : [epfile];
+      let count = 0;
+
+      for(let file of files){
+        let url = await uploadFile(file);
+        episodes.push({
+          episode: count++,
+          url: url
+        })
+      }
+    }
+
+    console.log(episodes);
+  }
+
+    try{
+      let upload = await Movies.create({
+        title: title,
+        filePath: movieUrl,
+        description:description,
+        language:language,
+        quality:quality,
+        year:year,
+        image: movieImg,
+        type:(movieUrl) ? 'Movie' : 'Series',
+        genre:genre,
+        episodes: episodes,
+      })
+  
+      if(upload){
+
+        res.json({
+          message: 'upload successfull!!'
+        })
+        
+      }else{
+        res.json({error: 'this error occurred:' + err})
+      }
+
+    }
+    catch(err){
+      // gx.log(err)
+      res.json({error: 'this error occurred:' + err});
+    }
+  }); 
 
 module.exports = router; 

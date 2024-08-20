@@ -29,9 +29,10 @@
 
 
         <% if (movies.length > 0) { %>
+          <% let newUploads = movies.reverse() %>
         <% for (i = 0; i < 4; i++) { %>
 
-        <% const movie = movies[i] %>
+        <% const movie = newUploads[i] %>
         <div class="swiper-slide">
 
           <!-- 3=----------->

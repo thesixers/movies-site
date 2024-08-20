@@ -11,13 +11,13 @@ router.get('*', checkUser);
 
   
 
-router.get('/', pageAuth, otherPage.home_get);
+router.get('/', otherPage.home_get);
 
-router.get('/movie', pageAuth, otherPage.movie_get);
+router.get('/movie', otherPage.movie_get);
 
-router.get('/animation', pageAuth, otherPage.animation_get);
+router.get('/animation', otherPage.animation_get);
 
-router.get('/series', pageAuth, otherPage.series_get); 
+router.get('/series', otherPage.series_get); 
 
 router.get('/profile-Update', pageAuth, otherPage.profileUpdate_get);
 
@@ -29,7 +29,7 @@ router.post('/profileUpdate', pageAuth, otherPage.profileUpdate_post);
 
 router.post('/movie-search', otherPage.movieSearch_post);
 
-router.get('/:id', pageAuth, otherPage.id); 
+router.get('/:id', otherPage.id); 
 
 
 module.exports = router;

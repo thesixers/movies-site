@@ -29,7 +29,9 @@
        <% } else {%>
           <img src="/images/man.png"alt="" width="40" height="40" class="rounded-circle me-2 pic">
        <% } %> 
-      <% } %>
+      <% }else{ %>
+        <img src="/images/man.png"alt="" width="40" height="40" class="rounded-circle me-2 pic">
+      <% } %>  
       </button>
       <div class="dropdown-content">
         <strong>
@@ -39,17 +41,24 @@
            <%} else { %>  
             <%= user.email %>
             <% } %>
-        <% } %>
+        <% } else {%>
+            <a href="/login">Login</a>
+        <% } %>  
         </strong>
-        <a href="javascript:void" class="account" onclick="
+          <% if(user){ %>
+            <a href="javascript:void" class="account" onclick="
         
         let it = document.querySelector('.profile-cover');
 
         it.classList.add('show-profile');
 
         ">Profile</a>
-        <hr>
-        <a href="/logout">Signout</a>
+          <hr>
+          <a href="/logout">Signout</a>
+        <% } else {%>
+          <hr>
+        <a href="/logout">SignUp</a>
+        <% } %>
       </div>
     </div>
     
@@ -100,7 +109,13 @@
         <% } %>
        <% } %>
     </div>
-    <div class="email"><span>Email:</span><%= user.email %></div>
+    <div class="email">
+      <% if(user){ %>
+        <span>Email:</span><%= user.email %>
+      <% } else{ %>
+        <span>Email:</span> example123@gmail.com  
+      <% } %>  
+    </div>
     <div>
       <span>Phone:</span>
       <% if (user) { %>

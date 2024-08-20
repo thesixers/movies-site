@@ -41,5 +41,93 @@ const uploadImage =  async(image) =>{
 
 }
 
+const uploadMoviesImage =  async(movie,dest) =>{
 
-module.exports = uploadImage;
+    // Configuration
+    cloudinary.config({ 
+        cloud_name: id, 
+        api_key: api_key, 
+        api_secret: secret
+    });
+    
+    // Upload an image
+     const uploadResult = await cloudinary.uploader
+       .upload(
+            movie,
+            { folder: 'gx-movies' }
+       )
+       .catch((error) => {
+           console.log(error);
+           return {err: error};
+       });
+    
+    
+    return uploadResult.secure_url; 
+
+}
+
+
+
+async function uploadFile(file) {
+    // let {name, data,mimetype} = file;
+  try {
+    const fileMetadata = {
+        name: file.name,
+        parents: ['12z75rPCyaziu8lgdgHox9MiD729wQc_A'], // Replace with the ID of the folder you shared with the service account
+      };
+      const media = {
+        mimeType: file.mimetype,
+        body: fs.createReadStream(file.tempFilePath), // Directly use file.data which is a Buffer
+      };
+
+    const response = await drive.files.create({
+      resource: fileMetadata,
+      media: media,
+      fields: 'id',
+    });
+
+
+    // console.log('File Id:', response.data.id);
+    makeFilePublic(response.data.id);
+    let url = getShareableLink(response.data.id)
+    return url;
+  } catch (error) {
+    console.error('Error uploading file:', error);
+  }
+}
+
+function bufferToStream(buffer) {
+    const readable = new Readable();
+    readable._read = () => {}; // _read is a no-op function
+    readable.push(buffer);
+    readable.push(null); // Indicates end of stream
+    return readable;
+  }
+
+  
+
+async function makeFilePublic(fileId) {
+
+    try {
+      await drive.permissions.create({
+        fileId: fileId,
+        requestBody: {
+          role: 'reader',
+          type: 'anyone',
+        },
+      });
+    //   console.log(`File is now publicly accessible. File ID: ${fileId}`);
+    } catch (error) {
+      console.error('Error making file public:', error);
+    }
+  }
+
+  function getShareableLink(fileId) {
+    const shareableLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
+    return shareableLink;
+  }
+  
+  
+
+
+module.exports = {uploadImage, uploadMoviesImage, uploadFile};

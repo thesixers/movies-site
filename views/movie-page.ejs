@@ -94,7 +94,7 @@
                 <!-- movie-------------->
                 <div class="play-movie">
                     <video id="m-video" controls>
-                        <source src="/Movies/<%= movie.filePath %>" type="video/mp4">
+                        <source src="<%= movie.filePath %>" type="video/mp4">
                     </video>
                 </div>
             </div>
@@ -123,38 +123,33 @@
     </section> -->
 
     <!--Download------------------>
+
     <section class="download-movie">
-
-      <!--container------------>
-      <% if(movie.episodes.length){ %>
-        <% let eps = movie.episodes %>
-
-        <% eps.forEach((ep,i) => { %>
-            <div class="download-container">
-                <div class="download-box">
-                    <span><i class="fas fa-server"></i>Episode <%= ep.episode + 1 %> </span>
-                    <span><%= movie.language %></span>
-                    <span>480p</span>
-                    <a href="<%= ep.url %>" download>Download</a>
-                </div>
-          </div>
-       <% }); %>
-        
-
-      <% }else{ %>  
-
-        <div class="download-container">
-            <!-- box -->
-            <div class="download-box">
-              <span><i class="fas fa-server"></i> Server 1</span>
-              <span><%= movie.language %></span>
-              <span>480p</span>
-              <a href="<%= movie.filePath %>" download>Download</a>
+        <!--container------------>
+        <% if(movie.episodes && movie.episodes.length > 0){ %>
+          <% movie.episodes.forEach((ep, i) => { %>
+              <div class="download-container">
+                  <div class="download-box">
+                      <span><i class="fas fa-server"></i> Episode <%= i + 1 %> </span>
+                      <span><%= movie.language %></span>
+                      <span>480p</span>
+                      <a href="<%= ep.url %>" download>Download</a>
+                  </div>
             </div>
-          </div>
-
-      <% } %>  
+         <% }); %>
+        <% } else { %>  
+          <div class="download-container">
+              <!-- box -->
+              <div class="download-box">
+                <span><i class="fas fa-server"></i> Server 1</span>
+                <span><%= movie.language %></span>
+                <span>480p</span>
+                <a href="<%= movie.filePath %>" download>Download</a>
+              </div>
+            </div>
+        <% } %>  
     </section>
+    
 
     <script type="text/javascript">
         atOptions = {
@@ -179,7 +174,6 @@
 
   <script src="/js/movie-page.js"></script>
   <script src="/js/search.js"></script>
-  <script src="/js/preloader.js"></script>
 
 </body>
 
