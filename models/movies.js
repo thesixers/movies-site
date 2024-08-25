@@ -30,6 +30,9 @@ const newMovies = new Schema({
   genre:{
     type: String
   },
+  episodes: {
+    type: Array
+  },
   createdAt:{
     type: Date,
     default: Date.now

@@ -63,12 +63,11 @@ module.exports.profileUpdate_get = (req, res) =>{
   res.render('profileUpdate', {title: 'profile update'});
 }
 
-module.exports.id = (req,res) =>{
+module.exports.id = async (req,res) =>{
   const id = req.params.id;
-  Movie.findById(id)
-  .then(result =>{
-    res.render('movie-page', { movie: result });
-  })
+
+  let movie = await Movie.findById(id);
+  if(movie) res.render('movie-page', { movie });
  
 }
 

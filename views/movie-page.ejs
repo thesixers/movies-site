@@ -126,7 +126,7 @@
 
     <section class="download-movie">
         <!--container------------>
-        <% if(movie.episodes && movie.episodes.length > 0){ %>
+        <% if(movie.type === 'Series'){ %>
           <% movie.episodes.forEach((ep, i) => { %>
               <div class="download-container">
                   <div class="download-box">
