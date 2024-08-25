@@ -207,6 +207,17 @@ router.post('/moviesupload', async (req, res)=>{
       // gx.log(err)
       res.json({error: 'this error occurred:' + err});
     }
-  }); 
+  });
+  
+router.post('/moviesupload/:id' , async (req,res) =>{
+  const id = req.params.id;
+  const {episodeNumber} = req.body
+  console.log(id,req.files, req.body);
+  if(!req.files) res.json({E: 'The files input field is empty nothing to upload'});
+
+  if(!episodeNumber || episodeNumber.length === 0) res.json({E: 'the episode number field cant be empty'});
+
+  
+})  
 
 module.exports = router; 

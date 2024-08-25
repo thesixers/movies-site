@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie <%= movie.title %></title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <%- include('partials/head.ejs') %> 
 </head>
 <body> 
@@ -15,6 +16,26 @@
     </div>
     
     <%- include('./partials/nav.ejs') %>
+
+    <div class="cont-upload-ep-wrapper">
+        <form class="form-ep">
+            <div class="close" onclick="closeform()"><span class="material-symbols-outlined">
+                close
+                </span>
+            </div>
+            <div class="close" onclick="closeform()"><span class="material-symbols-outlined">
+                close
+                </span></div>
+                <div class="main-ep">
+                    <div class="ep-wrapper">
+                        <input type="tel" name="episodeNumber" id="episodeNumber">
+                        <input type="file" id="epFile" name="episodeFile" accept=".mkv,.mp4">
+                    </div>
+                </div>
+                <div class="addBtn" onclick="add_New_Ep()">Add</div>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
 
     <!--===Movie-Bannner================================================-->
     <section class="movie-banner">
@@ -69,7 +90,13 @@
                         <a href="#"><%= movie.genre %></a>
                     </div>
                     <!--trailer-btn-------------->
-                    <a href="#" class="watch-btn">Watch Trailer</a>
+                    <% if(user){ %>  
+                        <% if(user.status === 'ADMIN'){ %>
+                            <% if(movie.type === 'Series') {%>
+                                <a href="#" class="watch-btn add-to-ep" onclick="showForm()">Add new Episode</a> 
+                            <% } %>    
+                        <% } %>    
+                    <% } %>    
                 </div>
                 
 
@@ -163,6 +190,44 @@
 
   <script src="/js/movie-page.js"></script>
   <script src="/js/search.js"></script>
+    <script>
+        let form = document.querySelector('.form-ep');
+            form.addEventListener('submit', async function(e){
+                e.preventDefault();
+
+                const formData = new FormData(this);
+
+                try{
+                    let res = await fetch(`/admin/moviesupload/<%= movie._id %>`, {
+                        method: 'POST', // Change to 'PUT' if you want to update
+                        body: formData,
+                    });
+
+                    if (!res.ok) throw new Error('Failed to upload episode.');
+                    
+                    // Handle success, like closing the form, showing a message, etc.
+                    closeform();
+                }
+                catch(err){
+                    console.log(err.message);
+                }
+            });
+
+        function add_New_Ep(){ 
+            document.querySelector('.main-ep').innerHTML += `<div class="ep-wrapper">
+                    <input type="tel" name="episodeNumber" id="episodeNumber">
+                    <input type="file" id="epFile" accept=".mkv,.mp4">
+                </div>`
+        }
+
+        function closeform(){
+            document.querySelector('.cont-upload-ep-wrapper').style.display = 'none';
+        }
+
+        function showForm(){
+            document.querySelector('.cont-upload-ep-wrapper').style.display = 'flex';
+        }
+    </script>
 
 </body>
 

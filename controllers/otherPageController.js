@@ -160,12 +160,8 @@ module.exports.movieSearch_post = async (req,res) =>{
   
   let name = nameUp.nameUp;
 
-
   try{
-    let result = await Movie.find();
-
-  
-    
+    let result = await Movie.find(); 
     for(i = 0; i < result.length; i++){
       let single = result[i];
 

@@ -13,8 +13,7 @@ const auth = new google.auth.GoogleAuth({
 
 const drive = google.drive({
     version: 'v3',
-    auth,
-    timeout: 100000 // 30 seconds
+    auth
   });
 
 module.exports = drive;

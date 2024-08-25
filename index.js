@@ -15,7 +15,6 @@ const { error } = require('console');
 const fileUploader = require('express-fileupload');
 require('dotenv').config();
 
-
 const app = express();
 const myDB = process.env.DATABASE_URL;
 
@@ -29,7 +28,13 @@ mongoose.connect(myDB)
   app.use(express.urlencoded({ extended: true })); 
   app.use(express.json());
   app.use(cookieParser());
-  app.use(morgan('dev')); 
+  morgan.token('custom', (req, res) => {
+    if (!req.url.includes('.jpg') && !req.url.includes('.png')) {
+      return `${req.method} ${req.url} ${res.statusCode}`;
+    }
+    return null;
+  });
+  app.use(morgan(':custom')); 
   // app.use(requestIp.mw());
   app.use(fileUploader({useTempFiles: true}))
 

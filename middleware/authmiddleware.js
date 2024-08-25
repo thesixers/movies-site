@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-// const express = require('express');
 const User = require('../models/user');
 const Movies = require('../models/movies');
 
@@ -11,11 +10,10 @@ const pageAuth = (req, res, next) =>{
   if(token){
     jwt.verify( token,'Is Obi a boy?', (err, decodedtoken) =>{
       if(err){
-        console.log(err);
+        console.log(err.message);
         res.redirect('/login');
       }
       else{
-        console.log(decodedtoken);
         next(); 
       }
     })
@@ -36,24 +34,20 @@ const checkUser =  (req, res, next) =>{
         next();
       }
       else{
-        console.log(decodedtoken);
         let user = await User.findById(decodedtoken.id);
        if(user){
         let name =  res.locals.user = user;
-
         req.user = decodedtoken.id 
-        // console.log(name);
        }else{
         res.redirect('/logout');
        }
-      next();
+        next();
       }
 
     })
   }
   else{
     res.locals.user = null;
-    // res.redirect('/GENESIX/login');
     next();
   }
 };
@@ -123,11 +117,10 @@ const adminAuth = (req, res, next) =>{
   if(token){
     jwt.verify( token,'GeNeSix is the future', (err, decodedtoken) =>{
       if(err){
-        console.log(err);
+        console.log(err.message);
         res.redirect('/admin/login');
       }
       else{
-        console.log(decodedtoken);
         next(); 
       }
     })
@@ -147,7 +140,6 @@ const checkAdmin =  (req, res, next) =>{
         next();
       }
       else{
-        console.log(decodedtoken);
         let user = await User.findById(decodedtoken.id);
         let movies = await Movies.find();
        if(user){
@@ -164,7 +156,6 @@ const checkAdmin =  (req, res, next) =>{
   }
   else{
     res.locals.user = null;
-    // res.redirect('/GENESIX/login');
     next();
   }
 };

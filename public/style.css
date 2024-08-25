@@ -1645,3 +1645,91 @@ footer .logo{
 
 
 /* video upload form */
+.cont-upload-ep-wrapper{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(34, 32, 32, 0.123);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 500;
+}
+.cont-upload-ep-wrapper form{
+  width: 500px;
+  height: 200px;
+  border: 1px solid var(--sub--);
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--main--);
+  border-radius: 10px;
+  overflow: scroll;
+}
+.cont-upload-ep-wrapper form::-webkit-scrollbar{
+  display: none;
+}
+.cont-upload-ep-wrapper .close{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--sub--);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text--);
+  cursor: pointer;
+}
+.cont-upload-ep-wrapper form button{
+  padding: 5px 10px;
+  background-color: var(--sub--);
+  border: none;
+  color: var(--text--);
+  width: 150px;
+  cursor: pointer;
+}
+.cont-upload-ep-wrapper form #episodeNumber{
+  width: 40px;
+  height: 30px;
+  padding: 5px;
+  outline: none;
+  background-color: var(--main--);
+  color: var(--text--);
+  border: 1px solid var(--text--);
+}
+.cont-upload-ep-wrapper form .ep-wrapper{
+  display: flex;
+  gap: 10px;
+}
+#epFile{
+  width: 200px;
+  height: 30px;
+  /* border: 1px solid var(--text--); */
+  background-color: var(--sub--);
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: var(--text--);
+}
+.cont-upload-ep-wrapper form .addBtn{
+  padding: 5px 10px;
+  background-color: var(--text--);
+  border: none;
+  color: var(--main--);
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+}
+.cont-upload-ep-wrapper form .main-ep{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
