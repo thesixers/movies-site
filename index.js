@@ -49,8 +49,7 @@ mongoose.connect(myDB)
   app.use(authRoutes); 
 
   app.use((req,res)=>{
-    res.status(404).render('404'); 
-    console.log(error.message); 
+    res.status(404).render('404');  
   });  
 
 
